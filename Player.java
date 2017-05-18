@@ -8,15 +8,19 @@ import javafx.geometry.BoundingBox;
 public class Player extends GamePiece
 {
     private int health, recovery, attack;
-    private int xIncrement, yIncrement, direction, xSpeed, ySpeed;
+    private int xIncrement, yIncrement, direction, xSpeed, ySpeed, frameIndex; //right and left index represents direction of frames
+    private boolean moving;
+    private String[] frames;
     private Color playerColor;
     private int[] playerControls;
     private static final int[] xSetNorth = {GameIO.cWidth/2, 0, GameIO.cWidth}, xSetSouth = xSetNorth, xSetWest = {0, GameIO.cWidth, GameIO.cWidth}, xSetEast = {GameIO.cWidth, 0, 0};
     private static final int[] ySetNorth = {0, GameIO.cHeight, GameIO.cHeight}, ySetSouth = {GameIO.cHeight, 0, 0}, ySetWest = {GameIO.cHeight/2, 0, GameIO.cHeight}, ySetEast = ySetWest;
+    private static String[] leftFrames = {"L1.png", "L2.png", "L3.png", "L4.png"}, rightFrames = {"R1.png", "R2.png", "R3.png", "R4.png"};
 
     public Player(int xStart, int yStart, int player, String imageName)
     {
-        super(imageName);
+        super(rightFrames[0]);
+        frames = rightFrames;
         setCollision(true);
         player = Utility.truncate(player, Constants.PLAYER_1, Constants.PLAYER_2);
         if (player == 1)
@@ -37,25 +41,36 @@ public class Player extends GamePiece
     public void respondToKeyPressed(KeyEvent e)
     {
         int keyCode = e.getKeyCode();
-        if (keyCode == playerControls[0])
+        if (!moving)
         {
-            direction = Constants.NORTH;
-            up();
-        }
-        if (keyCode == playerControls[1])
-        {
-            direction = Constants.SOUTH;
-            down();
-        }
-        if (keyCode == playerControls[2])
-        {
-            direction = Constants.WEST;
-            left();
-        }
-        if (keyCode == playerControls[3])
-        {
-            direction = Constants.EAST;
-            right();
+            if (keyCode == playerControls[0])
+            {
+                direction = Constants.NORTH;
+                up();
+                moving = true;
+            }
+            if (keyCode == playerControls[1])
+            {
+                direction = Constants.SOUTH;
+                down();
+                moving = true;
+            }
+            if (keyCode == playerControls[2])
+            {
+                direction = Constants.WEST;
+                left();
+                //frames
+                moving = true;
+                frames = leftFrames;
+            }
+            if (keyCode == playerControls[3])
+            {
+                direction = Constants.EAST;
+                right();
+                //frames
+                moving = true;
+                frames = rightFrames;
+            }
         }
     }
 
@@ -71,6 +86,15 @@ public class Player extends GamePiece
             xLoc += xIncrement;
             yLoc += yIncrement;
             updateBoundingBox(xIncrement, yIncrement);
+        }
+        if (direction != Constants.SOUTH && direction != Constants.NORTH && moving)
+        {
+            super.setImage(frames[frameIndex]);
+        }
+        frameIndex = (frameIndex + 1) % frames.length;
+        if (frameIndex == 0)
+        {
+            moving = false;
         }
     }
 

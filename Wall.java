@@ -10,7 +10,7 @@ public class Wall extends Obstacle
         setCollision(true);
         xLoc = xStart;
         yLoc = yStart;
-        bounds.add(new BoundingBox(xStart, yStart, GameIO.cWidth, GameIO.cHeight));
+        bounds.add(new BoundingBox(xStart, yStart, GameIO.cWidth - 2, GameIO.cHeight - 2));
     }
 
     public void doPlayerEffect(Player p)
