@@ -11,45 +11,13 @@ public abstract class GameEvent
         entities = new ArrayList<GamePiece>();
     }
 
-    public void draw(Graphics g)
-    {
-        g.setColor(Color.GREEN);
-        g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT); //draws the background
-        for (int i = entities.size() - 1; i >= 0; i--)
-        {
-            entities.get(i).draw(g);
-        }
-    }
+    public abstract void draw(Graphics g);
 
-    public void respondToKeyPressed(KeyEvent e)
-    {
-        for (GamePiece g : entities)
-        {
-            if (g instanceof Player)
-            {
-                ((Player) g).respondToKeyPressed(e);
-            }
-        }
-    }
+    public abstract void respondToKeyPressed(KeyEvent e);
 
-    public void respondToKeyReleased(KeyEvent e)
-    {
-        for (GamePiece g: entities)
-        {
-            if (g instanceof Player)
-            {
-                ((Player) g).respondToKeyReleased(e);
-            }
-        }
-    }
+    public abstract void respondToKeyReleased(KeyEvent e);
 
-    public void updateGameState()
-    {
-        for (int i = entities.size() - 1; i >= 0; i--)
-        {
-            entities.get(i).updateGameState(entities);
-        }
-    }
+    public abstract void updateGameState(ActionEvent e);
 
     public void addPiece(GamePiece g)
     {

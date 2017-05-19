@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
-public abstract class Token extends Obstacle
+import java.util.ArrayList;
+public class Token extends Obstacle
 {
-    public Token(String imageName)
+    public Token(int xStart, int yStart, String imageName)
     {
         super(imageName);
+        xLoc = xStart;
+        yLoc = yStart;
         setCollision(false);
     }
     
@@ -18,14 +21,13 @@ public abstract class Token extends Obstacle
         return false;
     }
     
-    public void updateGameState(int row, int col, GamePiece[][] board)
+    public void updateGameState(ArrayList<GamePiece> entities)
     {
         
     }
     
-    public void draw(int row, int col, Graphics g)
+    public void draw(Graphics g)
     {
-        g.setColor(Color.magenta);
-        g.fillRect(Utility.getXOnBoard(col), Utility.getYOnBoard(row), GameIO.cWidth, GameIO.cHeight);
+        g.drawImage(image, xLoc, yLoc, null);
     }
 }

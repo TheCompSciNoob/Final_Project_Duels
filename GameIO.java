@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 public class GameIO extends JComponent implements ActionListener, KeyListener
 {
-    public static final int cWidth = 64, cHeight = 64;
     private Timer t;
     private GameEvent event;
 
@@ -49,6 +48,6 @@ public class GameIO extends JComponent implements ActionListener, KeyListener
     public void actionPerformed(ActionEvent e)
     {
         repaint();
-        event.updateGameState();
+        event.updateGameState(e);
     }
 }
