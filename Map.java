@@ -156,7 +156,7 @@ public class Map
             {
                 for (int col=0;col<map[row].length;col++)
                 {
-                    if(map[row][col].getType() == 0 && (int)(Math.random()*6) == 1)
+                    if(map[row][col].getType() == 0 && (int)(Math.random()*15) == 1)
                     {
                         map[row][col].setItem(1);
                         num--;
