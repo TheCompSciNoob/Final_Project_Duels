@@ -194,8 +194,15 @@ public class Map
                 col != map[0].length-1 && map[row][col+1].getType()==0 &&
                 row != map.length-1 && map[row+1][col].getType()==0)
                 {
-                    map[row][col].setType(3);
-                }
+                    if((int)(Math.random()*3)>=1)
+                        {
+                        map[row][col].setType(3);
+                    }
+                    else
+                    {
+                        map[row][col].setType(2);
+                    }
+                    }
 
             }
         }
