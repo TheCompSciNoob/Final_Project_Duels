@@ -32,7 +32,7 @@ public class Tile
         type=q;
     }
     
-    public int setItem(int i)
+    public void setItem(int i)
     {
         item=i;
     }

@@ -15,10 +15,14 @@ public abstract class GamePiece
     public GamePiece(String imageName)
     {
         collision = true;	
-        try {
-            image = ImageIO.read(new File(imageName));
-        } catch (IOException e) {
-        }
+        setImage(imageName);
+        bounds = new ArrayList<BoundingBox>();
+    }
+    
+    public GamePiece()
+    {
+        collision = true;	
+        setImage("");
         bounds = new ArrayList<BoundingBox>();
     }
 
@@ -74,6 +78,30 @@ public abstract class GamePiece
             BoundingBox b = bounds.get(i);
             bounds.set(i, new BoundingBox(b.getMinX() + xIncrement, b.getMinY() + yIncrement, b.getWidth(), b.getHeight()));
         }
+    }
+    
+    public void setImage(String imageName)
+    {
+        try {
+            image = ImageIO.read(new File(imageName));
+        } catch (IOException e) {
+        }
+    }
+    
+    public boolean collide(GamePiece other)
+    {
+        ArrayList<BoundingBox> otherBounds = other.getBounds();
+        for (BoundingBox myBound : bounds)
+        {
+            for (BoundingBox otherBound : otherBounds)
+            {
+                if (otherBound.intersects(myBound))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public abstract void updateGameState(ArrayList<GamePiece> entities);
