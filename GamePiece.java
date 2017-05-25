@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Rectangle;
+import java.awt.Graphics2D;
 public abstract class GamePiece
 {
     private boolean collision;
@@ -101,6 +102,14 @@ public abstract class GamePiece
             }
         }
         return false;
+    }
+    
+    public void drawBounds(Graphics g)
+    {
+        for (Rectangle b : bounds)
+        {
+            ((Graphics2D) g).fill(b);
+        }
     }
 
     public abstract void updateGameState(ArrayList<GamePiece> entities);

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.awt.Rectangle;
+import java.awt.Graphics2D;
 public abstract class GenericPlayer extends GamePiece implements Player
 {
     protected int attack, recovery, health;
@@ -114,7 +115,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     @Override
     public void draw(Graphics g)
     {
-        g.drawImage(image, xLoc, yLoc, null);
+        //g.drawImage(image, xLoc, yLoc, null);
+        g.setColor(Color.WHITE);
+        for (Rectangle b : bounds)
+        {
+            ((Graphics2D) g).draw(b);
+        }
     }
 
     public void up()
@@ -126,7 +132,7 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public void down()
     {
         xIncrement = 0;
-        yIncrement = -ySpeed;
+        yIncrement = ySpeed;
     }
 
     public void left()

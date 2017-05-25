@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.awt.Rectangle;
 public class Cannoneer extends GenericPlayer
 {
     public Cannoneer(int xStart, int yStart, int player)
@@ -10,7 +11,8 @@ public class Cannoneer extends GenericPlayer
     @Override
     public void useActive1(ArrayList<GamePiece> entities)
     {
-
+        entities.add(new Projectile(new Rectangle(xLoc + 64, yLoc + 64, Constants.TILE_WIDTH, Constants.TILE_HEIGHT), Constants.NORTH, 10));
+        keyActive1 = false;
     }
     
     @Override
