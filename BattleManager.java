@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class BattleManager extends JComponent implements ActionListener, KeyListener
 {
     private Timer t;
-    private GameEvent event;
+    private ArrayList<GamePiece> entities;
 
-    public BattleManager(int speed, GameEvent e)
+    public BattleManager(int speed, ArrayList<GamePiece> pieces)
     {
         super();
-        event = e;
+        entities = pieces;
         t = new Timer(speed, this);
         t.start();
         addKeyListener(this);
@@ -23,19 +23,34 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
     {
         super.paintComponent(g);
         //draws components on board
-        event.draw(g);
+        for (int i = entities.size() - 1; i >= 0; i--)
+        {
+          entities.get(i).draw(g);
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e)
     {
-        event.respondToKeyPressed(e);
+      for (GamePiece g : entities)
+      {
+        if (g instanceof Player)
+        {
+          ((Player) g).respondToKeyPressed(e);
+        }
+      }
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-        event.respondToKeyReleased(e);
+      for (GamePiece g : entities)
+      {
+        if (g instanceof Player)
+        {
+          ((Player) g).respondToKeyReleased(e);
+        }
+      }
     }
 
     @Override
@@ -48,6 +63,24 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
     public void actionPerformed(ActionEvent e)
     {
         repaint();
-        event.updateGameState(e);
+        for (int i = entities.size() - 1; i >= 0; i--)
+        {
+          GamePiece g = entities.get(i);
+          g.updateGameState(entities); //more GamePiece objects can be added in this step
+          if (g instanceof Player && ((Player) g).getHealth() <= 0)
+          {
+            EndScreenManager esm = new endScreenManager(entities);
+            JFrame ef = new JFrame(): //end frame
+            ef.add(bm);
+            ef.setSize(getWidth(), getHeight());
+            ef.setLocationRelativeTo(null);
+            ef.setResizable(false);
+            ef.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            ef.setTitle("GameWindow");
+            ef.setVisible(true);
+            JFrame parent = this.getTopLevelAncestor();
+            parent.dispose(); //disposes battle screen after use
+          }
+        }
     }
 }
