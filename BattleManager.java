@@ -23,6 +23,8 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
     {
         super.paintComponent(g);
         //draws components on board
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
         for (int i = entities.size() - 1; i >= 0; i--)
         {
             entities.get(i).draw(g);

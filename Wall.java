@@ -20,9 +20,9 @@ public class Wall extends Obstacle
 
     public void draw(Graphics g)
     {
-        //g.setColor(Color.WHITE);
-        //g.fillRect(xLoc, yLoc, Constants.TILE_WIDTH, Constants.TILE_HEIGHT);
-        g.drawImage(image, xLoc, yLoc, null);
+        g.setColor(Color.WHITE);
+        g.fillRect(xLoc, yLoc, Constants.TILE_WIDTH, Constants.TILE_HEIGHT);
+        //g.drawImage(image, xLoc, yLoc, null);
     }
 
     public void updateGameState(ArrayList<GamePiece> entities)

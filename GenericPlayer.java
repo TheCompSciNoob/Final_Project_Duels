@@ -9,7 +9,10 @@ import java.awt.Graphics2D;
 public abstract class GenericPlayer extends GamePiece implements Player
 {
     protected int attack, recovery, health;
-    private int xIncrement, yIncrement, direction, xSpeed = 1, ySpeed = 1, frameIndex;
+    private int xIncrement, yIncrement, xSpeed = 1, ySpeed = 1, frameIndex;
+    protected int direction;
+    protected long time1 = System.nanoTime(), time2 = System.nanoTime(), time3 = System.nanoTime();
+    protected long cd1, cd2, cd3;
     protected String[] frames;
     protected int[] playerControls;
     protected boolean keyActive1, keyActive2, keyActive3;
@@ -91,17 +94,23 @@ public abstract class GenericPlayer extends GamePiece implements Player
             yLoc += yIncrement;
             updateBoundingBox(xIncrement, yIncrement);
         }
-        if (keyActive1)
+        if (keyActive1 && System.nanoTime() - time1 >= cd1)
         {
             useActive1(entities);
+            keyActive1 = false;
+            time1 = System.nanoTime();
         }
-        if (keyActive2)
+        if (keyActive2 && System.nanoTime() - time2 >= cd2)
         {
             useActive2(entities);
+            keyActive2 = false;
+            time2 = System.nanoTime();
         }
-        if (keyActive3)
+        if (keyActive3 && System.nanoTime() - time3 >= cd3)
         {
             useActive3(entities);
+            keyActive1 = false;
+            time3 = System.nanoTime();
         }
     }
     

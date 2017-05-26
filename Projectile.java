@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 public class Projectile extends Obstacle
 {
-    private final int velocity = 1;
+    private final int velocity = 2;
     private int xSpeed, ySpeed, damage;
 
     public Projectile(Rectangle shape, int direction, int damage)
@@ -22,7 +22,7 @@ public class Projectile extends Obstacle
         if (direction == Constants.EAST)
             xSpeed = velocity;
         if (direction == Constants.WEST)
-            ySpeed = -velocity;
+            xSpeed = -velocity;
     }
 
     public void doPlayerEffect(Player p)
@@ -32,25 +32,21 @@ public class Projectile extends Obstacle
 
     public void updateGameState(ArrayList<GamePiece> entities)
     {
-        int index = -1;
         for (int i = entities.size() - 1; i >= 0; i--)
         {
             GamePiece g = entities.get(i);
             if (g == this)
             {
-                index = i;
                 continue;
             }
-            if (collide(g))
+            if (collide(g) || Utility.outOfScreen(xLoc, yLoc))
             {
                 if (g instanceof Player)
                 {
                     doPlayerEffect((Player) g);
                 }
-                if (index != -1)
-                {
-                    entities.remove(i);
-                }
+                System.out.println("removed");
+                entities.remove(this);
             }
         }
         xLoc += xSpeed;
@@ -60,7 +56,7 @@ public class Projectile extends Obstacle
 
     public void draw(Graphics g)
     {
-        g.setColor(Color.BLACK);
-        g.drawRect(xLoc, yLoc, 50, 50);
+        g.setColor(Color.BLUE);
+        super.drawBounds(g);
     }
 }

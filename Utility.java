@@ -14,4 +14,9 @@ public class Utility
         }
         return result;
     }
+    
+    public static boolean outOfScreen(int xLoc, int yLoc)
+    {
+        return xLoc < 0 || yLoc < 0 || xLoc > Constants.WINDOW_WIDTH || yLoc > Constants.WINDOW_HEIGHT;
+    }
 }
