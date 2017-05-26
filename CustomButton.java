@@ -1,10 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Area;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.Cursor;
+
 public class CustomButton extends JButton implements MouseListener, MouseMotionListener
 {
     private Shape buttonShape;
@@ -28,7 +26,6 @@ public class CustomButton extends JButton implements MouseListener, MouseMotionL
     public void mouseClicked(MouseEvent e)
     {
         Area a = new Area(buttonShape);
-        System.out.println("mouseclicked is called");
         if (a.contains(e.getX(), e.getY()))
         {
             System.out.println("clicked");
