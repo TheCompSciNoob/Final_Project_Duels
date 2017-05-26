@@ -2,16 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-public class FrameManager extends JFrame
+public class FrameManager
 {
     //everything to keep track
     private ArrayList<GamePiece> entities;
+    private JFrame mainFrame = new JFrame(), battleFrame = new JFrame();
+    private JFrame[] frames = {mainFrame, battleFrame};
     private static final int gameSpeed = 3;
 
     public FrameManager()
     {
-        super();
-        setLayout(new FlowLayout());
         entities = new ArrayList<GamePiece>();
         makeList();
     }
@@ -19,24 +19,29 @@ public class FrameManager extends JFrame
     public void displayGUI()
     {
         //adds the main screen and its buttons
-        add(new MainScreenManager(entities));
         CustomButton startButton = new CustomButton(new Rectangle(50, 50, 50, 50));
+        startButton.setLocation(50, 50);
         startButton.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
                 {
-                    add(new BattleManager(gameSpeed, entities));
-                    revalidate();
                     startButton.setEnabled(false);
+                    mainFrame.getContentPane().removeAll();
+                    mainFrame.add(new BattleManager(gameSpeed, entities));
+                    mainFrame.revalidate();
                 }
             });
-        add(startButton);
-        //shows the frame
-        setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("GameWindow");
-        setVisible(true);
+        mainFrame.add(new MainScreenManager(entities));
+        mainFrame.add(startButton);
+        for (JFrame f : frames) {
+            f.setLayout(null);
+            f.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+            f.setLocationRelativeTo(null);
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setTitle("GameWindow");
+        }
+        mainFrame.setVisible(true);
+
     }
 
     private void makeList()
