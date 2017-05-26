@@ -1,6 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 public class FrameManager extends JFrame
 {
@@ -11,6 +11,7 @@ public class FrameManager extends JFrame
     public FrameManager()
     {
         super();
+        setLayout(new FlowLayout());
         entities = new ArrayList<GamePiece>();
         makeList();
     }
