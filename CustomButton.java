@@ -28,7 +28,6 @@ public class CustomButton extends JButton implements MouseListener, MouseMotionL
     public void mouseClicked(MouseEvent e)
     {
         Area a = new Area(buttonShape);
-        System.out.println("mouseclicked is called");
         if (a.contains(e.getX(), e.getY()))
         {
             System.out.println("clicked");
