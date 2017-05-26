@@ -45,7 +45,6 @@ public class Projectile extends Obstacle
                 {
                     doPlayerEffect((Player) g);
                 }
-                System.out.println("removed");
                 entities.remove(this);
             }
         }
