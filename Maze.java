@@ -94,16 +94,4 @@ public class Maze extends GameEvent
             }
         }
     }
-
-    @Override
-    public void respondToMouseClicked(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public boolean hoverOverButtons(MouseEvent e)
-    {
-        return false;
-    }
 }

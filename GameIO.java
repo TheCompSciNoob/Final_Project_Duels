@@ -57,7 +57,7 @@ public class GameIO extends JComponent implements ActionListener, KeyListener, M
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        event.respondToMouseClicked(e);
+        
     }
 
     @Override
@@ -87,14 +87,6 @@ public class GameIO extends JComponent implements ActionListener, KeyListener, M
     @Override
     public void mouseMoved(MouseEvent e)
     {
-        if (event.hoverOverButtons(e))
-        {
-            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        }
-        else
-        {
-            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        }
     }
 
     @Override

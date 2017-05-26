@@ -18,10 +18,6 @@ public abstract class GameEvent
     public abstract void respondToKeyReleased(KeyEvent e);
 
     public abstract void updateGameState(ActionEvent e);
-    
-    public abstract void respondToMouseClicked(MouseEvent e);
-    
-    public abstract boolean hoverOverButtons(MouseEvent e);
 
     public void addPiece(GamePiece g)
     {
