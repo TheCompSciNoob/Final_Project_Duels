@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.awt.*;
 public class EndScreenManager extends JPanel implements ActionListener
 {
   private ArrayList<GamePiece> entities;
@@ -59,7 +60,7 @@ public class EndScreenManager extends JPanel implements ActionListener
       parent.remove(this);
       parent.setVisible(false);
       parent.dispose();
-      Tester2.main({});
+      Tester2.main(new String[]{""});
     }
     if (command.equals(exitAction))
     {

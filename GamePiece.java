@@ -111,6 +111,16 @@ public abstract class GamePiece
             ((Graphics2D) g).fill(b);
         }
     }
+    
+    public int getX()
+    {
+        return xLoc;
+    }
+    
+    public int getY()
+    {
+        return yLoc;
+    }
 
     public abstract void updateGameState(ArrayList<GamePiece> entities);
 

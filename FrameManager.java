@@ -13,8 +13,8 @@ public class FrameManager
     public FrameManager(int width, int height)
     {
         entities = new ArrayList<GamePiece>();
-        mainFrame = new GameWindow(width, height);
-        battleFrame = new GameWindow(width, height);
+        mainFrame = new GameWindow();
+        battleFrame = new GameWindow();
         makeList();
         battleFrame.add(new BattleManager(3, entities));
     }

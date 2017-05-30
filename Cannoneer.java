@@ -5,15 +5,12 @@ public class Cannoneer extends GenericPlayer
 {
     private static final int pLength = 32, pWidth = 16;
     private static final int normDamage = 10, lowDamage = 1;
-    private int recovMultiplyer = 3;
-    private long recovDuration = (long) 3e9;
     private boolean updated = true;
-    
+
     public Cannoneer(int xStart, int yStart, int player)
     {
-        super(xStart, yStart, player);
-        health = 100;
-        recovery = 1;
+        super(xStart, yStart, player, 100);
+        recovery = 0;
         cd1 = (long) 7.5e8; //0.75 seconds
         cd2 = (long) 1e10; //10 seconds
         cd3 = (long) 1.5e10; //15 seconds
@@ -47,25 +44,12 @@ public class Cannoneer extends GenericPlayer
     @Override
     public void useActive2(ArrayList<GamePiece> entities)
     {
-        recovery *= recovMultiplyer;
-        updated = false;
+        health += maxHealth / 2;
     }
 
     @Override
     public void useActive3(ArrayList<GamePiece> entities)
     {
         entities.add(new CrossLaser(bounds.get(0), lowDamage, this));
-    }
-    
-    @Override
-    public void updateGameState(ArrayList<GamePiece> entities)
-    {
-        super.updateGameState(entities);
-        System.out.println(recovery);
-        if (System.nanoTime() - time2 > recovDuration && !updated)
-        {
-            recovery /= recovMultiplyer;
-            updated = true;
-        }
     }
 }

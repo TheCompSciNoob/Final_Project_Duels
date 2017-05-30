@@ -8,9 +8,8 @@ import java.awt.Rectangle;
 import java.awt.Graphics2D;
 public abstract class GenericPlayer extends GamePiece implements Player
 {
-    protected int attack, recovery, health;
-    private int xIncrement, yIncrement, xSpeed = 1, ySpeed = 1, frameIndex;
-    protected int direction;
+    protected int attack, recovery, health, maxHealth, direction;
+    private int xIncrement, yIncrement, xSpeed = 1, ySpeed = 1, playerNum;
     protected long time1 = System.nanoTime(), time2 = System.nanoTime(), time3 = System.nanoTime();
     protected long cd1, cd2, cd3;
     protected String[] frames;
@@ -18,11 +17,14 @@ public abstract class GenericPlayer extends GamePiece implements Player
     protected int[] playerControls;
     protected boolean keyActive1, keyActive2, keyActive3;
 
-    public GenericPlayer(int xStart, int yStart, int player)
+    public GenericPlayer(int xStart, int yStart, int player, int maxHealth)
     {
         super();
         setCollision(true);
+        this.maxHealth = maxHealth;
+        health = maxHealth;
         player = Utility.truncate(player, Constants.PLAYER_1, Constants.PLAYER_2);
+        playerNum = player;
         if (player == Constants.PLAYER_1)
         {
             playerControls = Constants.player1Controls;
@@ -223,6 +225,16 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public boolean west()
     {
         return direction == Constants.WEST;
+    }
+    
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+    
+    public int getPlayerNum()
+    {
+        return playerNum;
     }
 
     public abstract void useActive1(ArrayList<GamePiece> entities);

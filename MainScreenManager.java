@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.*;
 public class MainScreenManager extends JPanel implements ActionListener
 {
-    private static final String battleAction = "battleAction";
+    private static final String battleAction = "battleAction", fwdEditAction1 = "fwdEditAction1", revEditAction1 = "revEditAction1", fwdEditAction2 = "fwdEditAction2", revEditAction2 = "revEditAction2";;
     private int indexP1 = 0, indexP2 = 0;
     private Player[] characters1, characters2;
     private ArrayList<GamePiece> entities;
@@ -17,22 +17,22 @@ public class MainScreenManager extends JPanel implements ActionListener
         super(new BorderLayout(50, 100));
         entities = pieces;
         GamePiece g1 = entities.get(0); //player1
-        characters1 = new Player[] {new Canoneer(g1.getX(), g1.getY(), Constants.PLAYER_1), new Swordsman(g1.getX(), g1.getY(), Constants.PLAYER_1)};
+        characters1 = new Player[] {new Cannoneer(g1.getX(), g1.getY(), Constants.PLAYER_1), new Swordsman(g1.getX(), g1.getY(), Constants.PLAYER_1)};
         GamePiece g2 = entities.get(1); //player2
-        characters2 = new Player[] {new Canoneer(g2.getX(), g2.getY(), Constants.PLAYER_2), new Swordsman(g2.getX(), g2.getY(). Constants.PLAYER_2)};
+        characters2 = new Player[] {new Cannoneer(g2.getX(), g2.getY(), Constants.PLAYER_2), new Swordsman(g2.getX(), g2.getY(), Constants.PLAYER_2)};
+        createButtons();
     }
 
     @Override
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        
     }
-    
-    @Overide
+
+    @Override
     public Dimension getPreferredSize()
     {
-      return new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        return new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
     }
 
     public void createButtons() //call after added to JFrame
@@ -80,23 +80,26 @@ public class MainScreenManager extends JPanel implements ActionListener
         }
         if (command.equals(fwdEditAction1))
         {
-          indexP1 = (indexP1 + 1) % characters1.length;
-          entities.set(0, characters1[indexP1]);
+            indexP1 = (indexP1 + 1) % characters1.length;
+            entities.set(0, (GamePiece) characters1[indexP1]);
         }
         if (command.equals(revEditAction1))
         {
-          indexP1 = (indexP1 - 1) % characters1.length;
-          entities.set(0, characters1[indexP1]);
+            indexP1--;
+            if (indexP1 < 0)
+            indexP1 += characters1.length;
         }
         if (command.equals(fwdEditAction2))
         {
-          indexP2 = (indexP2 + 1) % characters2.length;
-          entities.set(1, characters[indexP2]);
+            indexP2 = (indexP2 + 1) % characters2.length;
+            entities.set(1, (GamePiece) characters2[indexP2]);
         }
         if (command.equals(revEditAction2))
         {
-          indexP2 = (indexP2 - 1) % characters2.length;
-          entities.set(1, characters[indexP2]);
+            indexP2--;
+            if (indexP2 < 0)
+            indexP2 += characters2.length;
+            entities.set(1, (GamePiece) characters2[indexP2]);
         }
     }
 }

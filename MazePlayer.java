@@ -217,4 +217,9 @@ public class MazePlayer extends GamePiece implements Player
     {
         return "Player";
     }
+    
+    public int getMaxHealth()
+    {
+        return 100;
+    }
 }
