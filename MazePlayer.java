@@ -88,7 +88,7 @@ public class MazePlayer extends GamePiece implements Player
 
     public void updateGameState(ArrayList<GamePiece> entities)
     {
-        if (!collideAfterMovement(xIncrement, yIncrement, entities))
+        if (!collideAfterMovement(xIncrement, yIncrement, entities) && !collideAfterMovement(xIncrement, yIncrement, entities) && (xLoc + xIncrement >=0 && yLoc + yIncrement >= 0) && (xLoc + xIncrement <= GameWindow.WIDTH - Constants.TILE_WIDTH && yLoc + yIncrement <= GameWindow.HEIGHT - Constants.TILE_HEIGHT))
         {
             xLoc += xIncrement;
             yLoc += yIncrement;

@@ -9,7 +9,7 @@ public class Tester3
         ArrayList<GamePiece> entities = new ArrayList<GamePiece>();
         entities.add(new Cannoneer(0, 0, Constants.PLAYER_1));
         entities.add(new Wall(100, 100, "Wall1.png"));
-        BattleManager bm = new BattleManager(3, entities);
+        BattleManager bm = new BattleManager(entities);
         JFrame bf = new JFrame();
         bf.add(bm);
         bf.setSize(512, 512);

@@ -16,7 +16,7 @@ public class FrameManager
         mainFrame = new GameWindow();
         battleFrame = new GameWindow();
         makeList();
-        battleFrame.add(new BattleManager(3, entities));
+        battleFrame.add(new BattleManager(entities));
     }
 
     public void displayGUI()

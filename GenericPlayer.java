@@ -117,7 +117,7 @@ public abstract class GenericPlayer extends GamePiece implements Player
             keyActive3 = false;
             time3 = System.nanoTime();
         }
-        health += recovery;
+        health = Math.min(maxHealth, health + recovery);
     }
 
     @Override
@@ -226,12 +226,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     {
         return direction == Constants.WEST;
     }
-    
+
     public int getMaxHealth()
     {
         return maxHealth;
     }
-    
+
     public int getPlayerNum()
     {
         return playerNum;

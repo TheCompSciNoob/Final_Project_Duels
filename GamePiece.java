@@ -47,6 +47,11 @@ public abstract class GamePiece
         {
             Rectangle newBox = (Rectangle) b.clone();
             newBox.translate(xIncrement, yIncrement);
+            Rectangle screenBox = new Rectangle(0, 0, Constants.WINDOW_WIDTH - 1, Constants.WINDOW_HEIGHT - 1);
+            if (!screenBox.contains(newBox))
+            {
+                return true;
+            }
             for (GamePiece g : entities)
             {
                 if (g.doesCollide() && g != this)

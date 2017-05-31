@@ -7,16 +7,12 @@ import java.awt.*;
 public class BattleManager extends JComponent implements ActionListener, KeyListener
 {
     private Rectangle limit;
-    private Timer t;
     private ArrayList<GamePiece> entities;
 
-    public BattleManager(int speed, ArrayList<GamePiece> pieces)
+    public BattleManager(ArrayList<GamePiece> pieces)
     {
         super();
         entities = pieces;
-        initLimit();
-        t = new Timer(speed, this);
-        t.start();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -26,8 +22,7 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
     {
         super.paintComponent(g);
         //draws components on board
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
+        setBackground(Color.BLACK);
         for (int i = entities.size() - 1; i >= 0; i--)
         {
             entities.get(i).draw(g);
@@ -87,25 +82,7 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
         {
             GamePiece g = entities.get(i);
             g.updateGameState(entities); //more GamePiece objects can be added in this step
-            if (g instanceof Player && ((Player) g).getHealth() <= 0)
-            {
-                gameEnd();
-                return;
-            }
         }
-    }
-
-    private void gameEnd()
-    {
-        setEnabled(false);
-        t.stop(); //disables the timer
-        EndScreenManager esm = new EndScreenManager(entities);
-        GameWindow w = new GameWindow();
-        w.setContentPane(esm);
-        w.initialize();
-        w.setVisible(true);
-        JFrame parent = (JFrame) getTopLevelAncestor();
-        parent.dispose(); //disposes battle screen after use
     }
 
     private void initLimit()

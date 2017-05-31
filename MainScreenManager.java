@@ -68,7 +68,7 @@ public class MainScreenManager extends JPanel implements ActionListener
         if (command.equals(battleAction))
         {
             setEnabled(false);
-            BattleManager bm = new BattleManager(3, entities);
+            BattleFrameManager bm = new BattleFrameManager(3, entities);
             GameWindow w = new GameWindow();
             w.setContentPane(bm);
             w.initialize();

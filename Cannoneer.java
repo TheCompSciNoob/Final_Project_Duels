@@ -4,16 +4,16 @@ import java.awt.Rectangle;
 public class Cannoneer extends GenericPlayer
 {
     private static final int pLength = 32, pWidth = 16;
-    private static final int normDamage = 10, lowDamage = 1;
+    private static final int normDamage = 10, lowDamage = 3;
     private boolean updated = true;
 
     public Cannoneer(int xStart, int yStart, int player)
     {
-        super(xStart, yStart, player, 100);
-        recovery = 0;
+        super(xStart, yStart, player, 10000);
+        recovery = 1;
         cd1 = (long) 7.5e8; //0.75 seconds
         cd2 = (long) 1e10; //10 seconds
-        cd3 = (long) 1.5e10; //15 seconds
+        cd3 = (long) 0;//1.5e10; //15 seconds
     }
 
     @Override
