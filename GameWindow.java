@@ -16,10 +16,11 @@ public class GameWindow extends JFrame
 
     public void initialize()
     {
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("GameWindow");
         pack();
+        setLocationRelativeTo(null);
     }
 }
