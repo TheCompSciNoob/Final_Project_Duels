@@ -27,6 +27,6 @@ public class Utility
         entities.add(new Cannoneer(0, 0, Constants.PLAYER_1));
         entities.add(new Cannoneer(Constants.WINDOW_WIDTH - Constants.TILE_WIDTH, Constants.WINDOW_HEIGHT - Constants.TILE_HEIGHT, Constants.PLAYER_2));
         entities.add(new Wall(100, 100, ""));
-        return new ArrayList<GamePiece>(entities);
+        return entities;
     }
 }

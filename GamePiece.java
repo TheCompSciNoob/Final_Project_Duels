@@ -47,7 +47,7 @@ public abstract class GamePiece
         {
             Rectangle newBox = (Rectangle) b.clone();
             newBox.translate(xIncrement, yIncrement);
-            Rectangle screenBox = new Rectangle(0, 0, Constants.WINDOW_WIDTH - 1, Constants.WINDOW_HEIGHT - 1);
+            Rectangle screenBox = new Rectangle(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
             if (!screenBox.contains(newBox))
             {
                 return true;
