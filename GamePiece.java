@@ -15,14 +15,14 @@ public abstract class GamePiece
 
     public GamePiece(String imageName)
     {
-        collision = true;	
+        collision = true;
         setImage(imageName);
         bounds = new ArrayList<Rectangle>();
     }
 
     public GamePiece()
     {
-        collision = true;	
+        collision = true;
         setImage("");
         bounds = new ArrayList<Rectangle>();
     }
