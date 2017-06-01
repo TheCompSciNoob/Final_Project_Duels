@@ -9,7 +9,8 @@ public class BattleFrameManager extends JPanel implements KeyListener, ActionLis
     private ArrayList<GamePiece> entities;
     private Timer t;
     private BattleManager battle;
-    private StatusBar bar;
+    private HealthBar bar1, bar2;
+    private StatusBar stats;
 
     public BattleFrameManager(int speed, ArrayList<GamePiece> pieces)
     {
@@ -18,10 +19,14 @@ public class BattleFrameManager extends JPanel implements KeyListener, ActionLis
         t = new Timer(3, this);
         t.start();
         entities = pieces;
-        bar = new StatusBar(pieces);
+        bar1 = new HealthBar(pieces, Constants.PLAYER_1);
+        bar2 = new HealthBar(pieces, Constants.PLAYER_2);
         battle = new BattleManager(pieces);
-        add(bar, BorderLayout.SOUTH);
+        stats = new StatusBar(pieces);
+        add(bar1, BorderLayout.WEST);
+        add(bar2, BorderLayout.EAST);
         add(battle, BorderLayout.CENTER);
+        add(stats, BorderLayout.SOUTH);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);

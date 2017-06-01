@@ -7,19 +7,27 @@ import java.awt.Rectangle;
 import java.awt.*;
 public class MainScreenManager extends JPanel implements ActionListener
 {
-    private static final String battleAction = "battleAction", fwdEditAction1 = "fwdEditAction1", revEditAction1 = "revEditAction1", fwdEditAction2 = "fwdEditAction2", revEditAction2 = "revEditAction2";;
-    private int indexP1 = 0, indexP2 = 0;
-    private Player[] characters1, characters2;
+    private static final String battleAction = "battleAction", fwdEditAction = "fwdEditAction", revEditAction = "revEditAction";
+    private int index, listLocation;
+    private Player[] characters;
     private ArrayList<GamePiece> entities;
 
-    public MainScreenManager(ArrayList<GamePiece> pieces)
+    public MainScreenManager(ArrayList<GamePiece> pieces, int playerNum)
     {
         super(new BorderLayout(50, 100));
         entities = pieces;
-        GamePiece g1 = entities.get(0); //player1
-        characters1 = new Player[] {new Cannoneer(g1.getX(), g1.getY(), Constants.PLAYER_1), new Swordsman(g1.getX(), g1.getY(), Constants.PLAYER_1)};
-        GamePiece g2 = entities.get(1); //player2
-        characters2 = new Player[] {new Cannoneer(g2.getX(), g2.getY(), Constants.PLAYER_2), new Swordsman(g2.getX(), g2.getY(), Constants.PLAYER_2)};
+        GamePiece player;
+        if (playerNum == Constants.PLAYER_1)
+        {
+          player = entities.get(0);
+          listLocation = 0;
+        }
+        if (playerNum == Constants.PLAYER_2)
+        {
+          player = entities.get(1);
+          listLocation = 1;
+        }
+        characters = new Player[] {new Cannoneer(g1.getX(), g1.getY(), Constants.PLAYER_1), new Swordsman(g1.getX(), g1.getY(), playerNum)};
         createButtons();
     }
 
@@ -43,22 +51,14 @@ public class MainScreenManager extends JPanel implements ActionListener
         startButton.addActionListener(this);
         add(startButton, BorderLayout.PAGE_END);
         //makes the buttons that allows user to change character properties
-        JButton fwdEdit1 = new JButton(fwdEditAction1); //sets to next character in array (P1)
-        fwdEdit1.setActionCommand(fwdEditAction1);
-        fwdEdit1.addActionListener(this);
-        add(fwdEdit1, BorderLayout.PAGE_START);
-        JButton revEdit1 = new JButton(revEditAction1); //sets to previous character in array (P1)
-        revEdit1.setActionCommand(revEditAction1);
-        revEdit1.addActionListener(this);
-        add(revEdit1, BorderLayout.LINE_END);
-        JButton fwdEdit2 = new JButton(fwdEditAction2); //sets to next character in array (P2)
-        fwdEdit2.setActionCommand(fwdEditAction2);
-        fwdEdit2.addActionListener(this);
-        add(fwdEdit2, BorderLayout.PAGE_START);
-        JButton revEdit2 = new JButton(revEditAction2); //sets to previous character in array (P2)
-        revEdit2.setActionCommand(revEditAction2);
-        revEdit2.addActionListener(this);
-        add(revEdit2, BorderLayout.LINE_END);
+        JButton fwdEdit = new JButton(fwdEditAction); //sets to next character in array (P1)
+        fwdEdit.setActionCommand(fwdEditAction);
+        fwdEdit.addActionListener(this);
+        add(fwdEdit, BorderLayout.EAST);
+        JButton revEdit = new JButton(revEditAction); //sets to previous character in array (P1)
+        revEdit.setActionCommand(revEditAction);
+        revEdit.addActionListener(this);
+        add(revEdit, BorderLayout.WEST);
     }
 
     @Override
@@ -78,28 +78,17 @@ public class MainScreenManager extends JPanel implements ActionListener
             parent.setVisible(false);
             parent.dispose();
         }
-        if (command.equals(fwdEditAction1))
+        if (command.equals(fwdEditAction))
         {
-            indexP1 = (indexP1 + 1) % characters1.length;
-            entities.set(0, (GamePiece) characters1[indexP1]);
+            index = (index + 1) % characters1.length;
+            entities.set(listLocation, (GamePiece) characters[index]);
         }
-        if (command.equals(revEditAction1))
+        if (command.equals(revEditAction))
         {
-            indexP1--;
-            if (indexP1 < 0)
-            indexP1 += characters1.length;
-        }
-        if (command.equals(fwdEditAction2))
-        {
-            indexP2 = (indexP2 + 1) % characters2.length;
-            entities.set(1, (GamePiece) characters2[indexP2]);
-        }
-        if (command.equals(revEditAction2))
-        {
-            indexP2--;
-            if (indexP2 < 0)
-            indexP2 += characters2.length;
-            entities.set(1, (GamePiece) characters2[indexP2]);
+            index--;
+            if (index < 0)
+            index += characters1.length;
+            entities.set(listLocation, (GamePiece) characters[index]);
         }
     }
 }
