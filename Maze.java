@@ -10,9 +10,13 @@ public class Maze extends GameEvent
     {
         super();
         phase = Constants.PHASE_1;
-        Map map = new Map();
-        map.start();
+        Maper map = new Maper();
+        map.genMap();
         entities = map.convertToGamePiece();
+        MazePlayer p = new MazePlayer(5 * 64, 0, Constants.PLAYER_1, "R1.png");
+        p.setSpeed(16, 16);
+        p.addHealth(100);
+        entities.add(0, p);
     }
 
     @Override
@@ -30,12 +34,12 @@ public class Maze extends GameEvent
         if (phase == Constants.PHASE_2)
         {
             g.setColor(Color.RED);
-            g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT); //draws the background
+            g.fillRect(0, 0, 15 * 64, 11 * 64); //draws the background
         }
         if (phase == Constants.PHASE_3)
         {
             g.setColor(Color.BLUE);
-            g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT); //draws the background
+            g.fillRect(0, 0, 15 * 64, 11 * 64); //draws the background
         }
     }
 

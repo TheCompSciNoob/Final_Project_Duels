@@ -103,7 +103,6 @@ public class MazePlayer extends GamePiece implements Player
 
     public void draw(Graphics g)
     {
-        g.setColor(Color.WHITE);
         g.drawImage(image, xLoc, yLoc, null);
         /*
         int[] xLocs, yLocs;
@@ -212,14 +211,47 @@ public class MazePlayer extends GamePiece implements Player
     {
         return playerNum;
     }
-    
+
     public String getName()
     {
         return "Player";
     }
-    
+
     public int getMaxHealth()
     {
         return 100;
+    }
+
+    @Override
+    public boolean collideAfterMovement(int xIncrement, int yIncrement, ArrayList<GamePiece> entities)
+    {
+        if (xIncrement == 0 && yIncrement == 0)
+        {
+            return false;
+        }
+        for (Rectangle b : bounds)
+        {
+            Rectangle newBox = (Rectangle) b.clone();
+            newBox.translate(xIncrement, yIncrement);
+            Rectangle screenBox = new Rectangle(0, 0, 15 * 64, 11 * 64);
+            if (!screenBox.contains(newBox))
+            {
+                return true;
+            }
+            for (GamePiece g : entities)
+            {
+                if (g.doesCollide() && g != this)
+                {
+                    for (Rectangle otherBox : g.getBounds())
+                    {
+                        if (newBox.intersects(otherBox))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
