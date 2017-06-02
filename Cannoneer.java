@@ -1,6 +1,6 @@
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.awt.Rectangle;
+import java.awt.*;
 public class Cannoneer extends GenericPlayer
 {
     private static final int pLength = 32, pWidth = 16;
@@ -13,7 +13,7 @@ public class Cannoneer extends GenericPlayer
         recovery = 1;
         cd1 = (long) 7.5e8; //0.75 seconds
         cd2 = (long) 1e10; //10 seconds
-        cd3 = (long) 0;//1.5e10; //15 seconds
+        cd3 = (long) 1.5e10; //15 seconds
     }
 
     @Override
@@ -44,12 +44,19 @@ public class Cannoneer extends GenericPlayer
     @Override
     public void useActive2(ArrayList<GamePiece> entities)
     {
-        health += maxHealth / 2;
+        health = Math.min(maxHealth, health + maxHealth / 2);
     }
 
     @Override
     public void useActive3(ArrayList<GamePiece> entities)
     {
         entities.add(new CrossLaser(bounds.get(0), lowDamage, this));
+    }
+    
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(Color.BLUE.brighter().brighter());
+        super.draw(g);
     }
 }

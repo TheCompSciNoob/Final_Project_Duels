@@ -10,7 +10,7 @@ public abstract class GenericPlayer extends GamePiece implements Player
 {
     protected int attack, recovery, health, maxHealth, direction;
     private int xIncrement, yIncrement, xSpeed = 1, ySpeed = 1, playerNum;
-    protected long time1 = System.nanoTime(), time2 = System.nanoTime(), time3 = System.nanoTime();
+    protected long time1 = 0, time2 = 0, time3 = 0;
     protected long cd1, cd2, cd3;
     protected String[] frames;
     protected String playerID;
@@ -131,7 +131,6 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public void draw(Graphics g)
     {
         //g.drawImage(image, xLoc, yLoc, null);
-        g.setColor(Color.WHITE);
         for (Rectangle b : bounds)
         {
             ((Graphics2D) g).draw(b);
@@ -140,6 +139,21 @@ public abstract class GenericPlayer extends GamePiece implements Player
         int stringHeight = g.getFontMetrics().getHeight();
         Rectangle box = bounds.get(0);
         g.drawString(playerID, (int) (box.getMinX() + (box.getWidth() - stringWidth) / 2), (int) (box.getMinY() + (box.getHeight() - stringHeight) / 2));
+    }
+
+    public boolean isActive1()
+    {
+        return System.nanoTime() - time1 >= cd1;
+    }
+
+    public boolean isActive2()
+    {
+        return System.nanoTime() - time2 >= cd2;
+    }
+
+    public boolean isActive3()
+    {
+        return System.nanoTime() - time3 >= cd3;
     }
 
     public void up()
