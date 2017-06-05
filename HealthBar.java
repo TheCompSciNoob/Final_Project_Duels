@@ -10,6 +10,7 @@ public class HealthBar extends JComponent implements ActionListener
     private static final int margin = 10, barWidth = 50, barHeight = 490; //for locations of health bars
     private Player player;
     private Rectangle base, shape;
+    private Color barColor;
 
     public HealthBar(ArrayList<GamePiece> entities, int playerNum)
     {
@@ -30,7 +31,7 @@ public class HealthBar extends JComponent implements ActionListener
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.GREEN);
+        g2.setColor(barColor);
         g2.fill(shape);
         g2.setColor(Color.WHITE);
         g2.draw(base);
@@ -55,5 +56,18 @@ public class HealthBar extends JComponent implements ActionListener
     {
         base = new Rectangle(margin, margin, barWidth, barHeight);
         shape = new Rectangle(margin, margin + barHeight - barHeight * player.getHealth() / player.getMaxHealth(), barWidth, barHeight * player.getHealth() / player.getMaxHealth());
+        double healthRatio = (double) player.getHealth() / player.getMaxHealth();
+        if (healthRatio < 0.3)
+        {
+            barColor = Color.RED;
+        }
+        else if (healthRatio < 0.6)
+        {
+            barColor = Color.YELLOW;
+        }
+        else
+        {
+            barColor = Color.GREEN;
+        }
     }
 }
