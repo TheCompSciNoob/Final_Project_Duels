@@ -40,13 +40,12 @@ public class Projectile extends Obstacle
             {
                 continue;
             }
-            if (Utility.outOfScreen(xLoc, yLoc))
+            else if (collide(g))
             {
-                entities.remove(this);
-            }
-            if (collide(g) && g instanceof Player)
-            {
-                doPlayerEffect((Player) g);
+                if (g instanceof Player)
+                {
+                    doPlayerEffect((Player) g);
+                }
                 entities.remove(this);
             }
         }

@@ -20,6 +20,8 @@ public class Wall extends Obstacle
 
     public void draw(Graphics g)
     {
+        g.setColor(Color.WHITE);
+        super.drawBounds(g);
         g.drawImage(image, xLoc, yLoc, null);
     }
 
