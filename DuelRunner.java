@@ -18,9 +18,9 @@ public class DuelRunner
     private static void createAndShowGUI()
     {
         ArrayList<GamePiece> entities = Utility.defaultList();
-        Perk[] perkList = {new Trojan(), new SelfDamage()};
-        MainScreenManager msm1 = new MainScreenManager(entities, Constants.PLAYER_1); //manages player 1
-        MainScreenManager msm2 = new MainScreenManager(entities, Constants.PLAYER_2); //manages player 2
+        Perk[] perkList = {new Standard(), new Tank(), new Thief(), new Trojan(), new SelfDamage()};
+        MainScreenManager msm1 = new MainScreenManager(entities, perkList, Constants.PLAYER_1); //manages player 1
+        MainScreenManager msm2 = new MainScreenManager(entities, perkList, Constants.PLAYER_2); //manages player 2
         JTabbedPane perkDescriptions = new JTabbedPane(JTabbedPane.LEFT); //manages all descriptions of the perks
         for (Perk p : perkList)
         {

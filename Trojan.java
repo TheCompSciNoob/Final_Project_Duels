@@ -13,7 +13,7 @@ public class Trojan extends Perk
     @Override
     public String getPerkName()
     {
-        return "Trojan - EX";
+        return "Ultimate Attack - EX";
     }
 
     @Override

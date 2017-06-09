@@ -14,7 +14,7 @@ public class MainScreenManager extends JPanel implements ActionListener
     private ArrayList<GamePiece> entities;
     private JTextArea description;
 
-    public MainScreenManager(ArrayList<GamePiece> pieces, int playerNum)
+    public MainScreenManager(ArrayList<GamePiece> pieces, Perk[] thePerkList, int playerNum)
     {
         super(new BorderLayout(5, 5));
         entities = pieces;
@@ -30,7 +30,7 @@ public class MainScreenManager extends JPanel implements ActionListener
             player = entities.get(listLocation);
         }
         characters = new Player[] {new Cannoneer(player.getX(), player.getY(), playerNum), new Swordsman(player.getX(), player.getY(), playerNum)};
-        perkList = new Perk[] {new Trojan(), new SelfDamage()};
+        perkList = thePerkList;
         ((GenericPlayer) player).setPerk(perkList[selectedIndex]);
         createComponents();
     }
@@ -59,7 +59,7 @@ public class MainScreenManager extends JPanel implements ActionListener
         add(revEdit, BorderLayout.WEST);
         //creates the text are which displays the character info
         int style = Font.BOLD;
-        Font font = new Font("Helvetica", style, 20);
+        Font font = new Font("Helvetica", style, 18);
         description = new JTextArea();
         description.setFont(font);
         description.setMargin(new Insets(5, 5, 5, 5));

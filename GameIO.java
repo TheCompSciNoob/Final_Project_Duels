@@ -7,9 +7,9 @@ import java.awt.Cursor;
 public class GameIO extends JComponent implements ActionListener, KeyListener, MouseListener, MouseMotionListener
 {
     private Timer t;
-    private GameEvent event;
+    private Maze event;
 
-    public GameIO(int speed, GameEvent e)
+    public GameIO(int speed, Maze e)
     {
         super();
         event = e;

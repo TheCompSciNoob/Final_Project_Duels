@@ -84,10 +84,10 @@ public class Swordsman extends GenericPlayer
     @Override
     public String getDescription()
     {
-        String genInfo = "Swordsman\n\nA melee class, powerful in close combat, with 3 offensive actives.\n";
-        String act1 = "Active 1 : A projectile that shoots in the direction of where the player chooses to go.\n";
-        String act2 = "Active 2 : Increases player's speed for 5 seconds\n";
-        String act3 = "Active 3 : Increases speed for 5 seconds; Creates 4 blades that allows the swordsman to charge at the opponent.\n";
+        String genInfo = "Swordsman\n\nA melee class, powerful in close combat, with 3 offensive actives.\n\n";
+        String act1 = "Active 1 : A projectile that shoots in the direction of where the player chooses to go.\n\n";
+        String act2 = "Active 2 : Increases player's speed for 5 seconds\n\n";
+        String act3 = "Active 3 : Increases speed for 5 seconds; Creates 4 blades that allows the swordsman to charge at the opponent.\n\n";
         return genInfo + act1 + act2 + act3;
     }
 }

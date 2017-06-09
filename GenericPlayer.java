@@ -291,6 +291,11 @@ public abstract class GenericPlayer extends GamePiece implements Player
     {
         return maxHealth;
     }
+    
+    public void setMaxHealth(int newMaxHealth)
+    {
+        maxHealth = newMaxHealth;
+    }
 
     public int getPlayerNum()
     {

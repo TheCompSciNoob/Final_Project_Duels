@@ -63,10 +63,10 @@ public class Cannoneer extends GenericPlayer
     @Override
     public String getDescription()
     {
-        String genInfo = "Cannoneer\n\nA long range class. Good for long distance battles, with both offense and defense actives.\n";
-        String act1 = "Active 1 : A projetile that shoots in the direction of where the player chooses to go.\n";
-        String act2 = "Active 2 : reduce half of the player's max health.\n";
-        String act3 = "Active 3 : A cross laser that causes severe damage to the other player.\n";
+        String genInfo = "Cannoneer\n\nA long range class. Good for long distance battles, with both offense and defense actives.\n\n";
+        String act1 = "Active 1 : A projectile that shoots in the direction of where the player chooses to go.\n\n";
+        String act2 = "Active 2 : reduce half of the player's max health.\n\n";
+        String act3 = "Active 3 : A cross laser that causes severe damage to the other player.\n\n";
         return genInfo + act1 + act2 + act3;
     }
 }

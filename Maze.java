@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.Color;
-public class Maze extends GameEvent
+public class Maze
 {
     private int phase;
-    
+    private ArrayList<GamePiece> entities;
+
     public Maze()
     {
         super();
@@ -19,7 +20,6 @@ public class Maze extends GameEvent
         entities.add(0, p);
     }
 
-    @Override
     public void draw(Graphics g)
     {
         if (phase == Constants.PHASE_1)
@@ -43,7 +43,6 @@ public class Maze extends GameEvent
         }
     }
 
-    @Override
     public void respondToKeyPressed(KeyEvent e)
     {
         if (phase == Constants.PHASE_1)
@@ -58,7 +57,6 @@ public class Maze extends GameEvent
         }
     }
 
-    @Override
     public void respondToKeyReleased(KeyEvent e)
     {
         if (phase == Constants.PHASE_1)
@@ -73,7 +71,6 @@ public class Maze extends GameEvent
         }
     }
 
-    @Override
     public void updateGameState(ActionEvent e)
     {
         boolean portalExist = false;
@@ -96,6 +93,18 @@ public class Maze extends GameEvent
             {
                 phase = Constants.PHASE_3;
             }
+        }
+    }
+
+    public void addPiece(GamePiece g)
+    {
+        if (g instanceof Player)
+        {
+            entities.add(0, g);
+        }
+        else
+        {
+            entities.add(g);
         }
     }
 }

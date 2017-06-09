@@ -14,7 +14,7 @@ public class BattleFrameManager extends JPanel
 
     public BattleFrameManager(int speed, ArrayList<GamePiece> pieces)
     {
-        super(new BorderLayout());
+        super(new BorderLayout(5, 5));
         setBackground(Color.BLACK);
         entities = pieces;
         bar1 = new HealthBar(pieces, Constants.PLAYER_1);
