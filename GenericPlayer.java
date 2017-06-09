@@ -16,11 +16,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     protected String playerID;
     protected int[] playerControls;
     protected boolean keyActive1, keyActive2, keyActive3;
+    private Perk perk;
 
     public GenericPlayer(int xStart, int yStart, int player, int maxHealth)
     {
         super();
-        setCollision(true);
+        setCollision(false);
         this.maxHealth = maxHealth;
         health = maxHealth;
         player = Utility.truncate(player, Constants.PLAYER_1, Constants.PLAYER_2);
@@ -93,6 +94,9 @@ public abstract class GenericPlayer extends GamePiece implements Player
     @Override
     public void updateGameState(ArrayList<GamePiece> entities)
     {
+        //updates playerStats due to perk
+        perk.updatePlayerStatus();
+        //movement
         if (!collideAfterMovement(xIncrement, yIncrement, entities))
         {
             xLoc += xIncrement;
@@ -145,6 +149,25 @@ public abstract class GenericPlayer extends GamePiece implements Player
         Rectangle box = bounds.get(0);
         g.drawString(playerID, (int) (box.getMinX() + (box.getWidth() - stringWidth) / 2), (int) (box.getMinY() + (box.getHeight() - stringHeight) / 2));
     }
+    
+    public void setPerk(Perk newPerk)
+    {
+        perk = newPerk;
+    }
+    
+    public void initialize()
+    {
+        perk.installDefaults(this);
+        if (playerNum == Constants.PLAYER_1)
+        {
+            setLoc(0, 0);
+        }
+        else if (playerNum == Constants.PLAYER_2)
+        {
+            setLoc(Constants.WINDOW_WIDTH - (int)bounds.get(0).getWidth(), Constants.WINDOW_HEIGHT - (int) bounds.get(0).getHeight());
+        }
+        setCollision(true);
+    }
 
     public boolean isActive1()
     {
@@ -196,6 +219,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     {
         health += add;
     }
+    
+    @Override
+    public void setHealth(int set)
+    {
+        health = Math.min(set, maxHealth);
+    }
 
     public int getHealth()
     {
@@ -206,6 +235,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public void addAttack(int add)
     {
         attack += add;
+    }
+    
+    @Override
+    public void setAttack(int set)
+    {
+        attack = set;
     }
 
     @Override
@@ -218,6 +253,12 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public void addRecovery(int add)
     {
         recovery += add;
+    }
+    
+    @Override
+    public void setRecovery(int set)
+    {
+        recovery = set;
     }
 
     @Override
@@ -254,6 +295,13 @@ public abstract class GenericPlayer extends GamePiece implements Player
     public int getPlayerNum()
     {
         return playerNum;
+    }
+    
+    public void setLoc(int x, int y)
+    {
+        updateBoundingBox(x - xLoc, y - yLoc);
+        xLoc = x;
+        yLoc = y;
     }
 
     public abstract void useActive1(ArrayList<GamePiece> entities);

@@ -206,6 +206,15 @@ public class MazePlayer extends GamePiece implements Player
     {
         return recovery;
     }
+    
+    @Override
+    public void setHealth(int set) {}
+    
+    @Override
+    public void setRecovery(int set) {}
+    
+    @Override
+    public void setAttack(int set) {}
 
     public int getPlayerNum()
     {
@@ -253,5 +262,11 @@ public class MazePlayer extends GamePiece implements Player
             }
         }
         return false;
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return "Boring";
     }
 }

@@ -7,6 +7,7 @@ public class Projectile extends Obstacle
 {
     private final int velocity = 2;
     private int xSpeed, ySpeed, damage;
+    private Color currentColor = Color.BLUE;
 
     public Projectile(Rectangle shape, int direction, int damage)
     {
@@ -40,9 +41,9 @@ public class Projectile extends Obstacle
             {
                 continue;
             }
-            else if (collide(g))
+            else if (g.doesCollide() && collide(g))
             {
-                if (g instanceof Player)
+                if (g.doesCollide() && g instanceof Player)
                 {
                     doPlayerEffect((Player) g);
                 }
@@ -56,7 +57,12 @@ public class Projectile extends Obstacle
 
     public void draw(Graphics g)
     {
-        g.setColor(Color.BLUE);
+        g.setColor(currentColor);
         super.drawBounds(g);
+    }
+    
+    public void setColor(Color newColor)
+    {
+        currentColor = newColor;
     }
 }

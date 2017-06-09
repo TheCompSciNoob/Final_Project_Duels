@@ -8,6 +8,7 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
 {
     private Rectangle limit;
     private ArrayList<GamePiece> entities;
+    private Timer t;
 
     public BattleManager(ArrayList<GamePiece> pieces)
     {
@@ -16,6 +17,9 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
+        t = new Timer(3, this);
+        t.start();
+        addKeyListener(this);
     }
 
     public void paintComponent(Graphics g)
@@ -77,16 +81,17 @@ public class BattleManager extends JComponent implements ActionListener, KeyList
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        repaint();
         for (int i = entities.size() - 1; i >= 0; i--)
         {
             GamePiece g = entities.get(i);
             g.updateGameState(entities); //more GamePiece objects can be added in this step
         }
+        JFrame parent = (JFrame) getTopLevelAncestor();
+        parent.getContentPane().repaint();
     }
 
-    private void initLimit()
+    public void stop()
     {
-
+        t.stop();
     }
 }

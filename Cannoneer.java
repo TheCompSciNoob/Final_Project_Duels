@@ -13,7 +13,7 @@ public class Cannoneer extends GenericPlayer
         recovery = 1;
         cd1 = (long) 7.5e8; //0.75 seconds
         cd2 = (long) 1e10; //10 seconds
-        cd3 = (long) 0;//1.5e10; //15 seconds
+        cd3 = (long) 1e10; //10 seconds
     }
 
     @Override
@@ -52,11 +52,21 @@ public class Cannoneer extends GenericPlayer
     {
         entities.add(new CrossLaser(bounds.get(0), attack / 50, this));
     }
-    
+
     @Override
     public void draw(Graphics g)
     {
         g.setColor(Color.BLUE.brighter().brighter());
         super.draw(g);
+    }
+
+    @Override
+    public String getDescription()
+    {
+        String genInfo = "Cannoneer\n\nA long range class. Good for long distance battles, with both offense and defense actives.\n";
+        String act1 = "Active 1 : A projetile that shoots in the direction of where the player chooses to go.\n";
+        String act2 = "Active 2 : reduce half of the player's max health.\n";
+        String act3 = "Active 3 : A cross laser that causes severe damage to the other player.\n";
+        return genInfo + act1 + act2 + act3;
     }
 }

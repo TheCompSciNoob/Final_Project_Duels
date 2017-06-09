@@ -9,11 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.io.IOException;
-public class StatusBar extends JComponent implements ActionListener
+import java.awt.geom.AffineTransform;
+public class StatusBar extends JComponent
 {
     private static final int margin = 10; //for locations of status bar
     private GenericPlayer player1, player2;
     private BufferedImage coolDown, active;
+    private int degrees;
 
     public StatusBar(ArrayList<GamePiece> entities)
     {
@@ -28,6 +30,13 @@ public class StatusBar extends JComponent implements ActionListener
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        AffineTransform at = AffineTransform.getTranslateInstance(0, 0);
+        at.rotate(Math.toRadians(degrees), coolDown.getWidth() / 2, coolDown.getHeight() / 2);
+        degrees++;
+        if (degrees == 360)
+        {
+            degrees = 0;
+        }
         //draws active status for player1
         Graphics2D g2 = (Graphics2D) g.create();
         g2.translate(margin, margin);
@@ -38,7 +47,7 @@ public class StatusBar extends JComponent implements ActionListener
         }
         else
         {
-            g2.drawImage(coolDown, 0, 0, null);
+            g2.drawImage(coolDown, at, null);
             g2.translate(coolDown.getWidth(), 0);
         }
         if (player1.isActive2())
@@ -48,7 +57,7 @@ public class StatusBar extends JComponent implements ActionListener
         }
         else
         {
-            g2.drawImage(coolDown, 0, 0, null);
+            g2.drawImage(coolDown, at, null);
             g2.translate(coolDown.getWidth(), 0);
         }
         if (player1.isActive3())
@@ -58,7 +67,7 @@ public class StatusBar extends JComponent implements ActionListener
         }
         else
         {
-            g2.drawImage(coolDown, 0, 0, null);
+            g2.drawImage(coolDown, at, null);
             g2.translate(coolDown.getWidth(), 0);
         }
         g2.dispose();
@@ -73,7 +82,7 @@ public class StatusBar extends JComponent implements ActionListener
         else
         {
             g3.translate(-coolDown.getWidth(), 0);
-            g3.drawImage(coolDown, 0, 0, null);
+            g3.drawImage(coolDown, at, null);
         }
         if (player2.isActive2())
         {
@@ -83,7 +92,7 @@ public class StatusBar extends JComponent implements ActionListener
         else
         {
             g3.translate(-coolDown.getWidth(), 0);
-            g3.drawImage(coolDown, 0, 0, null);
+            g3.drawImage(coolDown, at, null);
         }
         if (player2.isActive1())
         {
@@ -93,15 +102,9 @@ public class StatusBar extends JComponent implements ActionListener
         else
         {
             g3.translate(-coolDown.getWidth(), 0);
-            g3.drawImage(coolDown, 0, 0, null);
+            g3.drawImage(coolDown, at, null);
         }
         g3.dispose();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        repaint();
     }
 
     @Override

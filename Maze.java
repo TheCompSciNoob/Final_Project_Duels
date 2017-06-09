@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Maze extends GameEvent
 {
     private int phase;
-
+    
     public Maze()
     {
         super();

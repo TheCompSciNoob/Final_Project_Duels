@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.*;
-public class HealthBar extends JComponent implements ActionListener
+public class HealthBar extends JComponent
 {
     private static final int margin = 10, barWidth = 50, barHeight = 490; //for locations of health bars
     private Player player;
     private Rectangle base, shape;
-    private Color barColor;
+    private Color maxColor = Color.GREEN, minColor = Color.RED;
 
     public HealthBar(ArrayList<GamePiece> entities, int playerNum)
     {
@@ -29,19 +29,13 @@ public class HealthBar extends JComponent implements ActionListener
     @Override
     protected void paintComponent(Graphics g)
     {
+        updateShape();
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(barColor);
+        g2.setColor(findColor());
         g2.fill(shape);
         g2.setColor(Color.WHITE);
         g2.draw(base);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        repaint();
-        updateShape();
     }
 
     @Override
@@ -56,18 +50,19 @@ public class HealthBar extends JComponent implements ActionListener
     {
         base = new Rectangle(margin, margin, barWidth, barHeight);
         shape = new Rectangle(margin, margin + barHeight - barHeight * player.getHealth() / player.getMaxHealth(), barWidth, barHeight * player.getHealth() / player.getMaxHealth());
+    }
+    
+    private Color findColor()
+    {
         double healthRatio = (double) player.getHealth() / player.getMaxHealth();
-        if (healthRatio < 0.3)
-        {
-            barColor = Color.RED;
-        }
-        else if (healthRatio < 0.6)
-        {
-            barColor = Color.YELLOW;
-        }
-        else
-        {
-            barColor = Color.GREEN;
-        }
+        //finds difference in all colors
+        int dRed = maxColor.getRed() - minColor.getRed();
+        int dGreen = maxColor.getGreen() - minColor.getGreen();
+        int dBlue = maxColor.getBlue() - minColor.getBlue();
+        //finds new color composition
+        int newRed = minColor.getRed() + (int) (dRed * healthRatio);
+        int newGreen = minColor.getGreen() + (int) (dGreen * healthRatio);
+        int newBlue = minColor.getBlue() + (int) (dBlue * healthRatio);
+        return new Color(Utility.truncate(newRed, 0, 255), Utility.truncate(newGreen, 0, 255), Utility.truncate(newBlue, 0, 255));
     }
 }

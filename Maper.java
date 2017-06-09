@@ -18,7 +18,7 @@ public class Maper
     int counter =0;
     public Maper()
     {
-        map=new Tile[15][11];
+        map = new Tile[15][11];
 
         for (int row=0;row<map.length;row++)
         {
