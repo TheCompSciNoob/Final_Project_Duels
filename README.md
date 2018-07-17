@@ -1,5 +1,5 @@
 # Final_Project_Duels
-Working for my final project
+Working on my final project
 echo "# Final_Project_Duels" >> README.md
 git init
 git add README.md
